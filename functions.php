@@ -95,6 +95,7 @@ add_action( 'widgets_init', '_s_widgets_init' );
  */
 function _s_scripts() {
 	wp_enqueue_style( 'main.css', get_stylesheet_directory_uri() . '/dist/style.css', false, '6.9' );
+	wp_enqueue_script( 'main.js', get_stylesheet_directory_uri() . '/dist/main.js', false, false, true );
 }
 add_action( 'wp_enqueue_scripts', '_s_scripts' );
 
