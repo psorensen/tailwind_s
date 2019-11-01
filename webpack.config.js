@@ -1,4 +1,6 @@
+const config = require('./config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
 	entry: [
@@ -23,8 +25,19 @@ module.exports = {
 		}, ],
 	},
 	plugins: [
-		new ExtractTextPlugin('style.css', {
-			disable: process.env.NODE_ENV === 'development',
-		})
+		new ExtractTextPlugin({
+            filename:  (getPath) => {
+                return getPath('src/style.css').replace('css/js', 'css');
+            },
+            allChunks: true
+        }),
+		new BrowserSyncPlugin( {
+                proxy: config.url,
+                files: [
+                    '**/*.php'
+                ],
+                reloadDelay: 0
+            }
+        )
 	],
 }
